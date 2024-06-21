@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./pages/Layout";
+import Layout from "./assets/components/Layout";
 import axios from "axios";
 
 
@@ -17,24 +17,24 @@ import PostCreate from "./pages/Posts/postCreate";
 
 function App() {
   
-  // // creo una variabile con useState che accolga i dati della chiamata axios
-  // const [posts, getPosts] = useState(null);
+  // creo una variabile con useState che accolga i dati della chiamata axios
+  const [posts, getPosts] = useState(null);
   
-  // // effettuo la chiamata axios
-  // const fetchPosts = async () => {
-  //   try {
-  //     const response = await axios.get(apiUrl + "/posts");
-  //     getPosts(response.data);
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  // effettuo la chiamata axios
+  const fetchPosts = async () => {
+    try {
+      const response = await axios.get(apiUrl + "/posts");
+      getPosts(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // // effettuo la chiamata axios una sola volta al mounting della pagina
-  // useEffect(() => {
-  //   fetchPosts();
-  // }, []);
+  // effettuo la chiamata axios una sola volta al mounting della pagina
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   return (
     <div className="App">
