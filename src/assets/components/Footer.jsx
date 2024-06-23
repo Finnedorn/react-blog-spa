@@ -8,7 +8,8 @@ const Footer = () => {
       }}>
       <p style={{
         color: "white",
-        textAlign: "center"
+        textAlign: "center",
+        fontSize: "2rem"
         }}>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum, nobis.
       </p>

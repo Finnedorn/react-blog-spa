@@ -6,9 +6,11 @@ function Layout() {
   return (
     <>
       <Navbar />
-      {/* Outlet è una componente di react router che funge da
-       placeholder per estendere il layout stile laravel */}
-      <Outlet />
+      <div className="main py-5">
+        {/* Outlet è una componente di react router che funge da
+         placeholder per estendere il layout stile laravel */}
+        <Outlet />
+      </div>
       <Footer />
     </>
   );
