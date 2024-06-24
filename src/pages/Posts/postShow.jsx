@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 
 const apiUrl = import.meta.env.VITE_BASE_API_URL;
 
@@ -11,21 +11,16 @@ const PostShow = () => {
   const initialSlug = initialPost?.slug || slug; 
   const [post, setPost] = useState(initialPost);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const fetchSinglePost = async () => {
     try {
       setLoading(true);
-      setError(null); // Clear any previous errors
       const response = await axios.get(`${apiUrl}/posts/${initialSlug}`);
       setPost(response.data);
     } catch (error) {
-      console.error("Error fetching post:", error);
-      if (error.response && error.response.status === 422) {
-        setError("Invalid request. Please check the slug and try again.");
-      } else {
-        setError("An unexpected error occurred. Please try again later.");
-      }
+      console.log(error);
+      setLoading(false);
+      return <div>Errore durante il caricamento della pagina: {error}</div>;
     } finally {
       setLoading(false);
     }
@@ -40,15 +35,12 @@ const PostShow = () => {
   }, [initialSlug]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Carico il post...</div>;
   }
+ 
 
-  if (error) {
-    return <div>{error}</div>;
-  }
-
-  if (!post) {
-    return <div>No post found</div>;
+  if(!post) {
+    return <div>Post non trovato o non più presente.</div>
   }
 
   return (
